@@ -1,7 +1,8 @@
 // TEST: debe cambiar el texto inmediatamente al cargar el script
 document.getElementById('wu-status').textContent = 'Script WU arrancó';
 /* Simple cache-first service worker */
-const CACHE_NAME = 'estacion-pwa-v5';
+const CACHE_NAME = 'estacion-pwa-v6';
+
 
 <!-- Carga del script WU (con versión para evitar caché) -->
 <script src="/assets/wu.js?v=4"></script>
