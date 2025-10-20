@@ -1,8 +1,6 @@
 /* Simple cache-first service worker */
-// antes:
-const CACHE_NAME = 'estacion-pwa-v1';
-// ahora (cambia a v2):
-const CACHE_NAME = 'estacion-pwa-v3';
+const CACHE_NAME = 'estacion-pwa-v5';
+
 <!-- Carga del script WU (con versión para evitar caché) -->
 <script src="/assets/wu.js?v=4"></script>
 
