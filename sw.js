@@ -3,6 +3,8 @@
 const CACHE_NAME = 'estacion-pwa-v1';
 // ahora (cambia a v2):
 const CACHE_NAME = 'estacion-pwa-v3';
+<!-- Carga del script WU (con versión para evitar caché) -->
+<script src="/assets/wu.js?v=4"></script>
 
 
 const OFFLINE_URL = '/offline.html';
