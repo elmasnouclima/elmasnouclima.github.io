@@ -1,3 +1,5 @@
+// TEST: debe cambiar el texto inmediatamente al cargar el script
+document.getElementById('wu-status').textContent = 'Script WU arrancó';
 /* Simple cache-first service worker */
 const CACHE_NAME = 'estacion-pwa-v5';
 
