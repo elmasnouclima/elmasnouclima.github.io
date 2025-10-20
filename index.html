@@ -25,6 +25,7 @@
     }
   </script>
 </head>
+<script src="assets/wu.js"></script>
 <body>
   <header>
     <img class="logo" src="icons/icon-192.png" alt="icono">
@@ -39,7 +40,12 @@
         <button class="secondary" onclick="window.location.reload()">Actualizar</button>
       </div>
       <div class="offline-note">Estás sin conexión. Verás esta pegatina en caché. El panel completo requiere conexión.</div>
-    </div>
+    </div><div class="card" style="margin-top:12px">
+  <h2 style="margin:0 0 8px 0">Datos en tiempo real (WU)</h2>
+  <div id="wu-status" style="font-size:0.9rem;opacity:0.8">Cargando…</div>
+  <div id="wu-current" style="margin-top:8px"></div>
+</div>
+
   </main>
 
   <footer>
