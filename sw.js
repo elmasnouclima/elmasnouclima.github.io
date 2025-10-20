@@ -2,7 +2,8 @@
 // antes:
 const CACHE_NAME = 'estacion-pwa-v1';
 // ahora (cambia a v2):
-const CACHE_NAME = 'estacion-pwa-v2';
+const CACHE_NAME = 'estacion-pwa-v3';
+
 
 const OFFLINE_URL = '/offline.html';
 
