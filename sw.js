@@ -1,5 +1,9 @@
 /* Simple cache-first service worker */
+// antes:
 const CACHE_NAME = 'estacion-pwa-v1';
+// ahora (cambia a v2):
+const CACHE_NAME = 'estacion-pwa-v2';
+
 const OFFLINE_URL = '/offline.html';
 
 const PRECACHE = [
