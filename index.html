@@ -50,7 +50,74 @@
     Hecho para mostrar Weathercloud + datos WU en tu móvil.
   </footer>
 <!-- Carga del script WU (con versión para evitar caché) -->
-<script src="assets/wu.js?v=5"></script>
+<script src="assets/wu.js?v=1"></script>
+<script>
+// TEST inmediato: cambia el texto si el script se ejecuta
+(function(){
+  var s = document.getElementById('wu-status');
+  if (s) s.textContent = 'Script WU arrancó';
+})();
+
+// === Config WU ===
+const WU = {
+  stationId: "IELMAS44",
+  apiKey: "fa484bd110b24b3b884bd110b2fb3bef",
+  units: "m"
+};
+
+function setMsg(txt) {
+  const el = document.getElementById("wu-status");
+  if (el) el.textContent = txt;
+}
+
+async function wuFetchCurrent() {
+  const url = `https://api.weather.com/v2/pws/observations/current?stationId=${WU.stationId}&format=json&units=${WU.units}&apiKey=${WU.apiKey}&_=${Date.now()}`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`WU HTTP ${r.status}`);
+  const data = await r.json();
+  if (!data || !data.observations || !data.observations[0]) {
+    throw new Error("Respuesta sin observaciones");
+  }
+  return data.observations[0];
+}
+
+function renderCurrent(obs) {
+  const el = document.getElementById("wu-current");
+  if (!el) { setMsg("No existe el contenedor #wu-current"); return; }
+
+  const t  = obs.metric?.temp ?? "–";
+  const h  = obs.humidity ?? "–";
+  const ws = obs.metric?.windSpeed ?? "–";
+  const wg = obs.metric?.windGust ?? "–";
+  const pr = obs.metric?.precipRate ?? "–";
+  const p  = obs.metric?.pressure ?? "–";
+  const ts = obs.obsTimeUtc ? new Date(obs.obsTimeUtc + "Z").toLocaleString() : "—";
+
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+      <div><strong>Temperatura:</strong> ${t} °C</div>
+      <div><strong>Humedad:</strong> ${h} %</div>
+      <div><strong>Viento:</strong> ${ws} km/h (racha ${wg})</div>
+      <div><strong>Lluvia (inst.):</strong> ${pr} mm/h</div>
+      <div><strong>Presión:</strong> ${p} hPa</div>
+      <div><strong>Hora obs.:</strong> ${ts}</div>
+    </div>
+  `;
+}
+
+window.addEventListener("load", async () => {
+  setMsg("Script WU cargado. Pidiendo datos…");
+  try {
+    const obs = await wuFetchCurrent();
+    renderCurrent(obs);
+    setMsg("WU OK");
+  } catch (e) {
+    setMsg("WU error: " + (e?.message || e));
+    console.error(e);
+  }
+});
+</script>
+
   
 </body>
 </html>
