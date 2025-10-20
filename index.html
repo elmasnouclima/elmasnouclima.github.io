@@ -7,17 +7,13 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" sizes="192x192" href="icons/icon-192.png">
-  <title>Mi Estación | Weathercloud</title>
+  <title>Mi Estación | Weathercloud + WU</title>
   <link rel="stylesheet" href="assets/styles.css">
   <script>
-    // Detect offline/online and toggle class
-    function updateOnlineStatus() {
-      document.documentElement.classList.toggle('offline', !navigator.onLine);
-    }
+    function updateOnlineStatus(){ document.documentElement.classList.toggle('offline', !navigator.onLine); }
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
     window.addEventListener('load', updateOnlineStatus);
-    // Register Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch(console.error);
@@ -25,14 +21,14 @@
     }
   </script>
 </head>
-<script src="assets/wu.js"></script>
 <body>
   <header>
     <img class="logo" src="icons/icon-192.png" alt="icono">
-    <h1>Mi Estación — Opción 1 (PWA)</h1>
+    <h1>Mi Estación — PWA</h1>
   </header>
 
   <main>
+    <!-- TARJETA PRINCIPAL (pegatina Weathercloud) -->
     <div class="card">
       <img class="sticker" src="https://app.weathercloud.net/device/sticker/4096084067" alt="Weathercloud sticker de mi estación" loading="lazy" />
       <div class="actions">
@@ -40,32 +36,21 @@
         <button class="secondary" onclick="window.location.reload()">Actualizar</button>
       </div>
       <div class="offline-note">Estás sin conexión. Verás esta pegatina en caché. El panel completo requiere conexión.</div>
-    </div><div class="card" style="margin-top:12px">
-  <h2 style="margin:0 0 8px 0">Datos en tiempo real (WU)</h2>
-  <div id="wu-status" style="font-size:0.9rem;opacity:0.8">Cargando…</div>
-  <div id="wu-current" style="margin-top:8px"></div>
-</div> 
-  <div class="card" style="margin-top:12px">
-    <h2 style="margin:0 0 8px 0">Datos en tiempo real (WU)</h2>
-    <div id="wu-status" style="font-size:0.9rem;opacity:0.8">Cargando…</div>
-    <div id="wu-current" style="margin-top:8px"></div>
-  </div>
-
-<main>
-  <div class="card">
-    <img class="sticker" ...
-    <div class="actions">
-      ...
     </div>
-  </div>
-  <!-- AQUÍ VAMOS A PEGAR LA NUEVA TARJETA -->
 
+    <!-- NUEVA TARJETA WU (debe verse DEBAJO de la pegatina) -->
+    <div class="card" style="margin-top:12px">
+      <h2 style="margin:0 0 8px 0">Datos en tiempo real (WU)</h2>
+      <div id="wu-status" style="font-size:0.9rem;opacity:0.8">Cargando…</div>
+      <div id="wu-current" style="margin-top:8px"></div>
+    </div>
   </main>
 
   <footer>
-    Hecho para mostrar rápidamente tu Weathercloud en el móvil. Instálala desde el menú del navegador.
+    Hecho para mostrar Weathercloud + datos WU en tu móvil.
   </footer>
-   <script src="assets/wu.js"></script>
- 
+
+  <!-- Carga del script WU (con versión para evitar caché) -->
+  <script src="assets/wu.js?v=1"></script>
 </body>
 </html>
